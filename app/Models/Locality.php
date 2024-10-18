@@ -8,7 +8,7 @@ class Locality extends Model
 {
     protected $table = 'localities';
 
-    protected $timestamps = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'state',

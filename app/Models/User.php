@@ -47,4 +47,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function locality()
+    {
+        return $this->belongsTo(Locality::class);
+    }
 }

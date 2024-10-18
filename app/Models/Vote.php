@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Vote extends Model
 {
+    use HasFactory;
+
     protected $table = 'votes';
 
     protected $fillable = [
@@ -14,4 +17,14 @@ class Vote extends Model
         'voteable_type',
         'direction',
     ];
+
+    public function voteable()
+    {
+        return $this->morphTo();
+    }
+
+    public function voter()
+    {
+        return $this->belongsTo(User::class, 'voter_id');
+    }
 }

@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Locality::class);
     }
+
+    public function isCouncillor()
+    {
+        return $this->is_councillor;
+    }
 }

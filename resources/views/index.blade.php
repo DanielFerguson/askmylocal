@@ -146,12 +146,20 @@
                                     commodo nulla aliqua proident mollit ullamco exercitation tempor. Sint aliqua anim nulla
                                     sunt mollit id pariatur in voluptate cillum.</p>
                                 <div class="mt-10 flex items-center gap-x-6">
-                                    <a href="#"
-                                        class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                        Log in
-                                    </a>
-                                    <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Register today
-                                        <span aria-hidden="true">→</span></a>
+                                    @auth
+                                        <a href="{{ route('home') }}"
+                                            class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                            Go to {{ $locality->name }}
+                                        </a>
+                                    @else
+                                        <a href="{{ route('login') }}"
+                                            class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                            Log in
+                                        </a>
+                                        <a href="{{ route('register') }}"
+                                            class="text-sm font-semibold leading-6 text-gray-900">Register today
+                                            <span aria-hidden="true">→</span></a>
+                                    @endauth
                                 </div>
                             </div>
                             <div class="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">
@@ -210,21 +218,34 @@
         </main>
     </div>
 
-    {{-- Logos Section --}}
+    {{-- Stats --}}
     <div class="bg-white py-24">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
-            <div
-                class="mx-auto grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-12 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 sm:gap-y-14 lg:mx-0 lg:max-w-none lg:grid-cols-5">
-                <img class="col-span-2 max-h-16 w-full object-contain lg:col-span-1" src="/assets/shires/brimbank.png"
-                    alt="">
-                <img class="col-span-2 max-h-16 w-full object-contain lg:col-span-1" src="/assets/shires/colac.png"
-                    alt="">
-                <img class="col-span-2 max-h-16 w-full object-contain lg:col-span-1"
-                    src="/assets/shires/golden-plains.webp" alt="">
-                <img class="col-span-2 max-h-16 w-full object-contain sm:col-start-2 lg:col-span-1"
-                    src="/assets/shires/pyrenees.jpg" alt="">
-                <img class="col-span-2 col-start-2 max-h-16 w-full object-contain sm:col-start-auto lg:col-span-1"
-                    src="/assets/shires/whittlesea.webp" alt="">
+            <div class="mx-auto max-w-2xl lg:max-w-4xl">
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Trusted by creators worldwide
+                    </h2>
+                    <p class="mt-4 text-lg leading-8 text-gray-600">Lorem ipsum dolor sit amet consect adipisicing
+                        possimus.</p>
+                </div>
+                <dl
+                    class="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-3">
+                    <div class="flex flex-col bg-gray-400/5 p-8">
+                        <dt class="text-sm font-semibold leading-6 text-gray-600">Questions Asked</dt>
+                        <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900">
+                            {{ $num_questions_asked }}</dd>
+                    </div>
+                    <div class="flex flex-col bg-gray-400/5 p-8">
+                        <dt class="text-sm font-semibold leading-6 text-gray-600">Answers Given</dt>
+                        <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900">
+                            {{ $num_answers_given }}</dd>
+                    </div>
+                    <div class="flex flex-col bg-gray-400/5 p-8">
+                        <dt class="text-sm font-semibold leading-6 text-gray-600">Votes Cast</dt>
+                        <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900">{{ $num_votes_cast }}
+                        </dd>
+                    </div>
+                </dl>
             </div>
         </div>
     </div>
@@ -374,35 +395,21 @@
         </div>
     </div>
 
-    {{-- Stats --}}
+    {{-- Logos Section --}}
     <div class="bg-white py-24">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
-            <div class="mx-auto max-w-2xl lg:max-w-none">
-                <div class="text-center">
-                    <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Trusted by creators worldwide
-                    </h2>
-                    <p class="mt-4 text-lg leading-8 text-gray-600">Lorem ipsum dolor sit amet consect adipisicing
-                        possimus.</p>
-                </div>
-                <dl
-                    class="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
-                    <div class="flex flex-col bg-gray-400/5 p-8">
-                        <dt class="text-sm font-semibold leading-6 text-gray-600">Creators on the platform</dt>
-                        <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900">8,000+</dd>
-                    </div>
-                    <div class="flex flex-col bg-gray-400/5 p-8">
-                        <dt class="text-sm font-semibold leading-6 text-gray-600">Flat platform fee</dt>
-                        <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900">3%</dd>
-                    </div>
-                    <div class="flex flex-col bg-gray-400/5 p-8">
-                        <dt class="text-sm font-semibold leading-6 text-gray-600">Uptime guarantee</dt>
-                        <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900">99.9%</dd>
-                    </div>
-                    <div class="flex flex-col bg-gray-400/5 p-8">
-                        <dt class="text-sm font-semibold leading-6 text-gray-600">Paid out to creators</dt>
-                        <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900">$70M</dd>
-                    </div>
-                </dl>
+            <div
+                class="mx-auto grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-12 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 sm:gap-y-14 lg:mx-0 lg:max-w-none lg:grid-cols-5">
+                <img class="col-span-2 max-h-16 w-full object-contain lg:col-span-1" src="/assets/shires/brimbank.png"
+                    alt="">
+                <img class="col-span-2 max-h-16 w-full object-contain lg:col-span-1" src="/assets/shires/colac.png"
+                    alt="">
+                <img class="col-span-2 max-h-16 w-full object-contain lg:col-span-1"
+                    src="/assets/shires/golden-plains.webp" alt="">
+                <img class="col-span-2 max-h-16 w-full object-contain sm:col-start-2 lg:col-span-1"
+                    src="/assets/shires/pyrenees.jpg" alt="">
+                <img class="col-span-2 col-start-2 max-h-16 w-full object-contain sm:col-start-auto lg:col-span-1"
+                    src="/assets/shires/whittlesea.webp" alt="">
             </div>
         </div>
     </div>

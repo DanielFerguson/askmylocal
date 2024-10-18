@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->foreignId('voter_id')->constrained('users')->comment('The user who cast the vote');
             $table->morphs('voteable');
-            $table->tinyInteger('direction')->comment('The value of the vote. Can be 1 for upvote or -1 for downvote');
+            $table->string('direction')->comment('The value of the vote. Can be upvote or downvote');
         });
     }
 

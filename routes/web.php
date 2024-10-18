@@ -7,9 +7,18 @@ use App\Http\Controllers\LocalityController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\VoteController;
+use App\Models\Answer;
+use App\Models\Question;
+use App\Models\Vote;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'index')->name('home');
+Route::get('/', function () {
+    $num_questions_asked = Question::count();
+    $num_answers_given = Answer::count();
+    $num_votes_cast = Vote::count();
+
+    return view('index', compact('num_questions_asked', 'num_answers_given', 'num_votes_cast'));
+})->name('home');
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);

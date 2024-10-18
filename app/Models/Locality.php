@@ -14,4 +14,11 @@ class Locality extends Model
         'state',
         'name',
     ];
+
+    public static function findByStateAndName(string $state, string $name): ?Locality
+    {
+        return static::whereRaw('LOWER(state) = ?', [strtolower($state)])
+            ->whereRaw('LOWER(name) = ?', [strtolower($name)])
+            ->first();
+    }
 }

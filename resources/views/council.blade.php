@@ -152,4 +152,20 @@
         {{-- Question Modal --}}
         <x-question-modal />
     </div>
+
+    {{-- Footer --}}
+    <footer class="px-4">
+        <div class="pt-12 pb-6 flex items-center justify-between">
+            <p class="text-center text-xs leading-5 text-gray-500">&copy; 2024 Ask the Council, Inc. All rights
+                reserved.
+            </p>
+            {{-- Sign out --}}
+            <form method="POST" action="{{ route('logout') }}" class="inline">
+                @csrf
+                <button type="submit" class="text-center text-xs leading-5 text-gray-500">
+                    Sign out
+                </button>
+            </form>
+        </div>
+    </footer>
 @endsection

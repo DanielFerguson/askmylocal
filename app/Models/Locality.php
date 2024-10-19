@@ -20,8 +20,8 @@ class Locality extends Model
 
     public static function findByStateAndName(string $state, string $name): ?Locality
     {
-        return static::whereRaw('LOWER(state) = ?', [strtolower($state)])
-            ->whereRaw('LOWER(name) = ?', [strtolower($name)])
+        return static::whereRaw('LOWER(REPLACE(state, " ", "-")) = ?', [strtolower(str_replace(' ', '-', $state))])
+            ->whereRaw('LOWER(REPLACE(name, " ", "-")) = ?', [strtolower(str_replace(' ', '-', $name))])
             ->first();
     }
 

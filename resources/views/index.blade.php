@@ -3,7 +3,10 @@
 @section('content')
     {{-- Hero Section --}}
     <div class="bg-white">
-        <header class="absolute inset-x-0 top-0 z-50" x-data="{ mobileMenuOpen: false }">
+        <header class="absolute inset-x-0 top-0 z-50" x-data="{ mobileMenuOpen: false, searchModalOpen: false }">
+            {{-- Search Modal --}}
+            <x-search-modal />
+
             <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
                 <div class="flex lg:flex-1">
                     <a href="#" class="-m-1.5 p-1.5">
@@ -44,6 +47,15 @@
                             </button>
                         </form>
                     @else
+                        <button @click="$dispatch('open-search-modal')"
+                            class="text-sm font-semibold leading-6 text-gray-900 mr-6 flex items-center gap-x-2">
+                            Search
+                            {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                            </svg> --}}
+                        </button>
                         <a href="{{ route('login') }}" class="text-sm font-semibold leading-6 text-gray-900">Log in <span
                                 aria-hidden="true">&rarr;</span></a>
                     @endauth
@@ -138,7 +150,7 @@
                     <div class="mx-auto max-w-7xl px-6 pb-32 pt-36 sm:pt-60 lg:px-8 lg:pt-32">
                         <div class="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
                             <div class="relative w-full max-w-xl lg:shrink-0 xl:max-w-2xl">
-                                <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">We’re changing the
+                                <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">We're changing the
                                     way people connect.</h1>
                                 <p class="mt-6 text-lg leading-8 text-gray-600 sm:max-w-md lg:max-w-none">Cupidatat minim
                                     id
@@ -168,7 +180,8 @@
                                     <div class="relative">
                                         <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&h=528&q=80"
                                             alt=""
-                                            class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg">
+                                            class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
+                                            loading="lazy" decoding="async">
                                         <div
                                             class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10">
                                         </div>
@@ -178,7 +191,8 @@
                                     <div class="relative">
                                         <img src="https://images.unsplash.com/photo-1485217988980-11786ced9454?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&h=528&q=80"
                                             alt=""
-                                            class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg">
+                                            class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
+                                            loading="lazy" decoding="async">
                                         <div
                                             class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10">
                                         </div>
@@ -186,7 +200,8 @@
                                     <div class="relative">
                                         <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=focalpoint&fp-x=.4&w=396&h=528&q=80"
                                             alt=""
-                                            class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg">
+                                            class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
+                                            loading="lazy" decoding="async">
                                         <div
                                             class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10">
                                         </div>
@@ -196,7 +211,8 @@
                                     <div class="relative">
                                         <img src="https://images.unsplash.com/photo-1670272504528-790c24957dda?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=left&w=400&h=528&q=80"
                                             alt=""
-                                            class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg">
+                                            class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
+                                            loading="lazy" decoding="async">
                                         <div
                                             class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10">
                                         </div>
@@ -204,7 +220,8 @@
                                     <div class="relative">
                                         <img src="https://images.unsplash.com/photo-1670272505284-8faba1c31f7d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&h=528&q=80"
                                             alt=""
-                                            class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg">
+                                            class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
+                                            loading="lazy" decoding="async">
                                         <div
                                             class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10">
                                         </div>
@@ -263,12 +280,15 @@
                         <dl class="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
                             <div class="relative pl-9">
                                 <dt class="inline font-semibold text-gray-900">
-                                    <svg class="absolute left-1 top-1 h-5 w-5 text-indigo-600" viewBox="0 0 20 20"
-                                        fill="currentColor" aria-hidden="true" data-slot="icon">
-                                        <path fill-rule="evenodd"
-                                            d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                    <div class="mb-6 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
+                                        <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" aria-hidden="true"
+                                            data-slot="icon">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
                                     Push to deploy.
                                 </dt>
                                 <dd class="inline">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores
@@ -276,12 +296,15 @@
                             </div>
                             <div class="relative pl-9">
                                 <dt class="inline font-semibold text-gray-900">
-                                    <svg class="absolute left-1 top-1 h-5 w-5 text-indigo-600" viewBox="0 0 20 20"
-                                        fill="currentColor" aria-hidden="true" data-slot="icon">
-                                        <path fill-rule="evenodd"
-                                            d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                    <div class="mb-6 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
+                                        <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" aria-hidden="true"
+                                            data-slot="icon">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
                                     SSL certificates.
                                 </dt>
                                 <dd class="inline">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem
@@ -289,14 +312,17 @@
                             </div>
                             <div class="relative pl-9">
                                 <dt class="inline font-semibold text-gray-900">
-                                    <svg class="absolute left-1 top-1 h-5 w-5 text-indigo-600" viewBox="0 0 20 20"
-                                        fill="currentColor" aria-hidden="true" data-slot="icon">
-                                        <path
-                                            d="M4.632 3.533A2 2 0 0 1 6.577 2h6.846a2 2 0 0 1 1.945 1.533l1.976 8.234A3.489 3.489 0 0 0 16 11.5H4c-.476 0-.93.095-1.344.267l1.976-8.234Z" />
-                                        <path fill-rule="evenodd"
-                                            d="M4 13a2 2 0 1 0 0 4h12a2 2 0 1 0 0-4H4Zm11.24 2a.75.75 0 0 1 .75-.75H16a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-.75.75h-.01a.75.75 0 0 1-.75-.75V15Zm-2.25-.75a.75.75 0 0 0-.75.75v.01c0 .414.336.75.75.75H13a.75.75 0 0 0 .75-.75V15a.75.75 0 0 0-.75-.75h-.01Z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                                    <div class="mb-6 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
+                                        <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" aria-hidden="true"
+                                            data-slot="icon">
+                                            <path
+                                                d="M4.632 3.533A2 2 0 0 1 6.577 2h6.846a2 2 0 0 1 1.945 1.533l1.976 8.234A3.489 3.489 0 0 0 16 11.5H4c-.476 0-.93.095-1.344.267l1.976-8.234Z" />
+                                            <path fill-rule="evenodd"
+                                                d="M4 13a2 2 0 1 0 0 4h12a2 2 0 1 0 0-4H4Zm11.24 2a.75.75 0 0 1 .75-.75H16a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-.75.75h-.01a.75.75 0 0 1-.75-.75V15Zm-2.25-.75a.75.75 0 0 0-.75.75v.01c0 .414.336.75.75.75H13a.75.75 0 0 0 .75-.75V15a.75.75 0 0 0-.75-.75h-.01Z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
                                     Database backups.
                                 </dt>
                                 <dd class="inline">Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna

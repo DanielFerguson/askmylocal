@@ -28,12 +28,12 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::post('/search', SearchController::class)->name('search');
 
-Route::get('/{state}/{locality}', [LocalityController::class, 'show'])
-    ->name('locality')
-    ->where(['state' => '[a-zA-Z]+', 'locality' => '[a-zA-Z]+']);
-
 Route::middleware('auth')->group(function () {
     Route::resource('questions', QuestionController::class)->only(['store', 'update', 'destroy']);
     Route::resource('answers', AnswerController::class)->only(['store', 'update', 'destroy']);
     Route::resource('votes', VoteController::class)->only(['store', 'update', 'destroy']);
 });
+
+Route::get('/{state}/{locality}', [LocalityController::class, 'show'])
+    ->name('locality')
+    ->where(['state' => '[a-zA-Z-]+', 'locality' => '[a-zA-Z-]+']);

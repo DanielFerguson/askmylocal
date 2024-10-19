@@ -37,9 +37,14 @@ class LoginController extends Controller
         if (Auth::attempt($validated, $request->boolean('remember_me'))) {
             $request->session()->regenerate();
 
+            $state = strtolower(str_replace(' ', '-', Auth::user()->locality->state));
+            $name = strtolower(str_replace(' ', '-', Auth::user()->locality->name));
+
+            $first_name = explode(' ', Auth::user()->name)[0];
+
             // Redirect to home or dashboard
-            return redirect()->intended(route('home'))
-                ->with('success', 'Login successful!');
+            return redirect()->intended(route('locality', ['state' => $state, 'locality' => $name]))
+                ->with('success', 'Welcome back, '.$first_name.'!');
         }
 
         // Redirect to login page with error message

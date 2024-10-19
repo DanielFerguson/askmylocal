@@ -38,6 +38,6 @@ class LocalityController extends Controller
             ->councillors()
             ->get();
 
-        return view('council', compact('locality', 'questions', 'councillors'));
+        return view('localities.show', compact('locality', 'questions', 'councillors'));
     }
 }

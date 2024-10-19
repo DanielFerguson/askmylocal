@@ -11,7 +11,10 @@ class QuestionController extends Controller
 {
     public function store(StoreQuestionRequest $request): RedirectResponse
     {
-        Question::create($request->validated());
+        Question::create(array_merge($request->validated(), [
+            'asked_by_id' => auth()->id(),
+            'locality_id' => auth()->user()->locality_id,
+        ]));
 
         return redirect()->back()->with('success', 'Question created successfully');
     }

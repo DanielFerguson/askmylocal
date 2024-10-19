@@ -31,6 +31,7 @@ class LocalityController extends Controller
 
         $questions = $locality
             ->questions()
+            ->orderBy('created_at', 'desc')
             ->get();
 
         $councillors = $locality

@@ -15,7 +15,7 @@ class QuestionFactory extends Factory
     {
         return [
             'asked_by_id' => User::factory(),
-            'locality_id' => Locality::factory(),
+            'locality_id' => Locality::first(),
             'value' => $this->faker->sentence(10).'?',
         ];
     }

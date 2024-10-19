@@ -16,7 +16,10 @@ class LoginController extends Controller
             // Get the user's locality
             $locality = Auth::user()->locality;
 
-            return redirect()->route('locality', ['state' => $locality->state, 'locality' => $locality->name]);
+            $state = strtolower(str_replace(' ', '-', $locality->state));
+            $name = strtolower(str_replace(' ', '-', $locality->name));
+
+            return redirect()->route('locality', ['state' => $state, 'locality' => $name]);
         }
 
         return view('login');

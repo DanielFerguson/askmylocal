@@ -17,8 +17,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Create localities
+        $this->call(LocalitySeeder::class);
+
         // Create 10 localities
-        Locality::factory(10)->create()->each(function ($locality) {
+        Locality::all()->each(function ($locality) {
             // Create 5-10 users for each locality, including at least one councillor
             User::factory(rand(5, 10))->create(['locality_id' => $locality->id])
                 ->each(function ($user, $index) use ($locality) {

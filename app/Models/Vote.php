@@ -18,6 +18,10 @@ class Vote extends Model
         'direction',
     ];
 
+    protected $casts = [
+        'voteable_id' => 'integer',
+    ];
+
     public function voteable()
     {
         return $this->morphTo();

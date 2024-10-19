@@ -29,6 +29,14 @@ class LocalityController extends Controller
             abort(404);
         }
 
-        return view('council', compact('locality'));
+        $questions = $locality
+            ->questions()
+            ->get();
+
+        $councillors = $locality
+            ->councillors()
+            ->get();
+
+        return view('council', compact('locality', 'questions', 'councillors'));
     }
 }

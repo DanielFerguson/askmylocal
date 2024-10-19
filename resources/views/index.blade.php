@@ -33,12 +33,16 @@
                     <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Company</a>
                 </div> --}}
                 <div class="hidden lg:flex lg:flex-1 lg:justify-end gap-x-4">
+                    <button @click="$dispatch('open-search-modal')"
+                        class="text-sm font-semibold leading-6 text-gray-900 mr-6 flex items-center gap-x-2">
+                        Search
+                    </button>
                     @auth
                         @php
                             $user = Auth::user();
                             $locality = $user->locality;
                         @endphp
-                        <a href="{{ route('locality', ['state' => $locality->state, 'locality' => $locality->name]) }}"
+                        <a href="{{ route('locality', ['state' => strtolower(str_replace(' ', '-', $locality->state)), 'locality' => strtolower(str_replace(' ', '-', $locality->name))]) }}"
                             class="text-sm font-semibold leading-6 text-gray-900">Go to
                             {{ $locality->name }}</a>
                         <form method="POST" action="{{ route('logout') }}" class="inline ml-4">
@@ -48,15 +52,6 @@
                             </button>
                         </form>
                     @else
-                        <button @click="$dispatch('open-search-modal')"
-                            class="text-sm font-semibold leading-6 text-gray-900 mr-6 flex items-center gap-x-2">
-                            Search
-                            {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="size-4">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                            </svg> --}}
-                        </button>
                         <a href="{{ route('login') }}" class="text-sm font-semibold leading-6 text-gray-900">Log in <span
                                 aria-hidden="true">&rarr;</span></a>
                     @endauth
@@ -101,7 +96,7 @@
                                         $user = Auth::user();
                                         $locality = $user->locality;
                                     @endphp
-                                    <a href="{{ route('locality', ['state' => $locality->state, 'locality' => $locality->name]) }}"
+                                    <a href="{{ route('locality', ['state' => strtolower(str_replace(' ', '-', $locality->state)), 'locality' => strtolower(str_replace(' ', '-', $locality->name))]) }}"
                                         class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                                         Go to {{ $locality->name }}
                                     </a>
@@ -160,7 +155,7 @@
                                     sunt mollit id pariatur in voluptate cillum.</p>
                                 <div class="mt-10 flex items-center gap-x-6">
                                     @auth
-                                        <a href="{{ route('locality', ['state' => $locality->state, 'locality' => $locality->name]) }}"
+                                        <a href="{{ route('locality', ['state' => strtolower(str_replace(' ', '-', $locality->state)), 'locality' => strtolower(str_replace(' ', '-', $locality->name))]) }}"
                                             class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                                             Go to {{ $locality->name }}
                                         </a>

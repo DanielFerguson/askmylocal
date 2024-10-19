@@ -17,9 +17,24 @@ class Question extends Model
         'value',
     ];
 
+    protected $with = [
+        'answers',
+        'votes',
+    ];
+
     public function locality()
     {
         return $this->belongsTo(Locality::class);
+    }
+
+    public function votes()
+    {
+        return $this->morphMany(Vote::class, 'voteable');
+    }
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
     }
 
     public function askedBy()

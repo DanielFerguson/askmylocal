@@ -17,9 +17,18 @@ class Answer extends Model
         'value',
     ];
 
+    // protected $with = [
+    //     'votes',
+    // ];
+
     public function question()
     {
         return $this->belongsTo(Question::class);
+    }
+
+    public function votes()
+    {
+        return $this->hasMany(Vote::class);
     }
 
     public function answeredBy()

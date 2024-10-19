@@ -27,7 +27,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
             'remember_token' => Str::random(10),
-            'locality_id' => Locality::factory(),
+            'locality_id' => Locality::first(),
             'is_councillor' => $this->faker->boolean(5), // 5% chance of being a councillor
         ];
     }

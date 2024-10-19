@@ -13,7 +13,10 @@ class LoginController extends Controller
     {
         // If the user is already logged in, redirect to the home page
         if (Auth::check()) {
-            return redirect()->route('home');
+            // Get the user's locality
+            $locality = Auth::user()->locality;
+
+            return redirect()->route('locality', ['state' => $locality->state, 'locality' => $locality->name]);
         }
 
         return view('login');

@@ -5,13 +5,13 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\LocalityController;
 use App\Http\Controllers\QuestionController;
-use App\Http\Controllers\SearchController;
 use App\Http\Controllers\VoteController;
 use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Vote;
 use Illuminate\Support\Facades\Route;
 
+// Home
 Route::get('/', function () {
     $num_questions_asked = Question::count();
     $num_answers_given = Answer::count();
@@ -20,13 +20,18 @@ Route::get('/', function () {
     return view('index', compact('num_questions_asked', 'num_answers_given', 'num_votes_cast'));
 })->name('home');
 
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [LoginController::class, 'login']);
-Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register', [RegisterController::class, 'register']);
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+// Login
+Route::controller(LoginController::class)->group(function () {
+    Route::get('/login', 'showLoginForm')->name('login');
+    Route::post('/login', 'login');
+    Route::post('/logout', 'logout')->name('logout');
+});
 
-Route::post('/search', SearchController::class)->name('search');
+// Register
+Route::controller(RegisterController::class)->group(function () {
+    Route::get('/register', 'showRegistrationForm')->name('register');
+    Route::post('/register', 'register');
+});
 
 Route::middleware('auth')->group(function () {
     Route::resource('questions', QuestionController::class)->only(['store', 'update', 'destroy']);
@@ -34,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('votes', VoteController::class)->only(['store', 'update', 'destroy']);
 });
 
+// Locality
 Route::get('/{state}/{locality}', [LocalityController::class, 'show'])
     ->name('locality')
     ->where(['state' => '[a-zA-Z-]+', 'locality' => '[a-zA-Z-]+']);

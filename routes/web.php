@@ -35,7 +35,7 @@ Route::controller(RegisterController::class)->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::resource('questions', QuestionController::class)->only(['store', 'update', 'destroy']);
-    Route::resource('answers', AnswerController::class)->only(['create', 'store', 'update', 'destroy']);
+    Route::resource('questions.answers', AnswerController::class)->only(['create', 'store', 'update', 'destroy']);
     Route::post('/votes', VoteController::class)->name('votes.store');
 });
 

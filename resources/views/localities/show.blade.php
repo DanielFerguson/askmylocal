@@ -71,11 +71,13 @@
                             <div class="bg-gray-50 space-y-4 px-4 py-5 sm:p-6">
                                 @foreach ($question->answers as $answer)
                                     <div class="flex flex-col justify-between items-end">
-                                        <p class="text-sm text-gray-900">
+                                        <p class="text-sm text-gray-900 text-left w-full">
                                             {{ $answer->value }}
                                         </p>
-                                        <p class="text-xs text-gray-500 mt-2">
-                                            Answered by {{ $answer->answeredBy->name }}
+                                        <p class="text-xs text-gray-500 mt-2 flex items-center gap-2">
+                                            Cr. {{ $answer->answeredBy->name }}
+                                            <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                                alt="{{ $answer->answeredBy->name }}" class="w-4 h-4 rounded-full">
                                         </p>
                                     </div>
                                 @endforeach
@@ -83,14 +85,14 @@
                         @else
                             <div class="bg-gray-50 px-4 py-5 sm:p-6">
                                 <p class="text-xs text-gray-400">
-                                    No answers yet. Upvote if you want to see more answers.
+                                    No answers yet.
                                 </p>
                             </div>
                         @endif
                         {{-- Answer Link --}}
-                        @if (auth()->check() && auth()->user()->is_councillor)
+                        @if (auth()->check() && auth()->user()->is_councillor && $question->locality_id === auth()->user()->locality_id)
                             <div class="bg-gray-50 px-4 py-5 sm:p-6 pt-0 flex justify-end">
-                                <a href="{{ route('answers.create', $question) }}"
+                                <a href="{{ route('questions.answers.create', $question) }}"
                                     class="text-xs text-gray-500 hover:text-gray-900 border border-gray-300 rounded-md px-2 py-1">
                                     Answer this question
                                 </a>

@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
 class StoreAnswerRequest extends FormRequest
 {
@@ -12,7 +11,7 @@ class StoreAnswerRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Auth::user()->isCouncillor();
+        return auth()->check() && auth()->user()->is_councillor;
     }
 
     /**
